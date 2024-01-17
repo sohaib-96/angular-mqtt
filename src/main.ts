@@ -1,6 +1,11 @@
+import './ws.polly-fill';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
+import { MqttModule, MQTT_SERVICE_OPTIONS } from 'ngx-mqtt';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS)),
+  ]
+}).catch((err) => console.error(err));
